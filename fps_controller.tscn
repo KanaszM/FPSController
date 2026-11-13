@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dlsx5ttt5rpdj"]
+
+[ext_resource type="Script" uid="uid://bxrc3pphum0eh" path="res://FPSController/fps_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" uid="uid://b16xsdj61gw6d" path="res://FPSController/camera/fps_controller_camera.tscn" id="2_camera"]
+
+[sub_resource type="CapsuleShape3D" id="Capsule_body"]
+radius = 0.45
+height = 1.95
+
+[node name="FPSController" type="CharacterBody3D" unique_id=593782198]
+floor_snap_length = 0.3
+script = ExtResource("1_controller")
+
+[node name="CameraRig" parent="." unique_id=1614651868 instance=ExtResource("2_camera")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=2477416]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975, 0)
+shape = SubResource("Capsule_body")
+
+[node name="RayCeilingAbove" type="RayCast3D" parent="." unique_id=1159444497]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, 0)
+target_position = Vector3(0, 0.15, 0)

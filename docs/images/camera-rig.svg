@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title description">
+  <title id="title">Camera rig: ordered pivots and independent control</title>
+  <desc id="description">A left-to-right vertical scene chain shows root, yaw, step offset, pitch, landing, bobbing, shake, Camera3D, and Hands. A control panel distinguishes input, following, movement synchronization, FOV ownership, and effect reset.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#8eefda"/></marker>
+    <style>text{font-family:Arial,sans-serif;fill:#edf3ff}.heading{font-size:19px;font-weight:bold}.label{font-size:14px}.small{font-size:12px;fill:#b8c7dd}.box{fill:#243553;stroke:#8da5f3;stroke-width:1.5}.link{stroke:#8eefda;stroke-width:2;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1000" height="600" rx="18" fill="#111c2c"/>
+  <text x="28" y="37" class="heading">One view, composed from independent transform layers</text>
+  <text x="28" y="62" class="small">Scene hierarchy on the left / control policies on the right / conceptual diagram</text>
+  <rect x="24" y="84" width="530" height="488" rx="12" fill="#1a2940"/>
+  <rect x="575" y="84" width="401" height="488" rx="12" fill="#1a2940"/>
+  <rect x="46" y="103" width="230" height="36" rx="7" class="box"/>
+  <text x="60" y="126" class="label">FPSControllerCamera root</text>
+  <path d="M69 139v13" class="link"/>
+  <rect x="64" y="156" width="230" height="32" rx="7" class="box"/>
+  <text x="78" y="177" class="label">CameraRotationH</text>
+  <text x="309" y="177" class="small">Yaw / local Y rotation</text>
+  <path d="M87 188v11" class="link"/>
+  <rect x="82" y="203" width="230" height="32" rx="7" class="box"/>
+  <text x="96" y="224" class="label">CameraPivotStepping</text>
+  <text x="327" y="224" class="small">Before pitch</text>
+  <path d="M105 235v11" class="link"/>
+  <rect x="100" y="250" width="230" height="32" rx="7" class="box"/>
+  <text x="114" y="271" class="label">CameraRotationV</text>
+  <text x="345" y="271" class="small">Pitch / local X rotation</text>
+  <path d="M123 282v11" class="link"/>
+  <rect x="118" y="297" width="230" height="32" rx="7" class="box"/>
+  <text x="132" y="318" class="label">CameraPivotLanding</text>
+  <text x="363" y="318" class="small">Local Y dip</text>
+  <path d="M141 329v11" class="link"/>
+  <rect x="136" y="344" width="230" height="32" rx="7" class="box"/>
+  <text x="150" y="365" class="label">CameraPivotBobbing</text>
+  <text x="381" y="365" class="small">Local X / Y</text>
+  <path d="M159 376v11" class="link"/>
+  <rect x="154" y="391" width="230" height="32" rx="7" class="box"/>
+  <text x="168" y="412" class="label">CameraPivotShake</text>
+  <text x="399" y="412" class="small">Local X / Y / Z</text>
+  <path d="M177 423v11" class="link"/>
+  <rect x="172" y="438" width="230" height="32" rx="7" class="box"/>
+  <text x="186" y="459" class="label">Camera (Camera3D)</text>
+  <text x="417" y="459" class="small">Render / FOV</text>
+  <path d="M195 470v11" class="link"/>
+  <rect x="190" y="485" width="230" height="32" rx="7" fill="#203d41" stroke="#8eefda" stroke-width="1.5"/>
+  <text x="204" y="506" class="label">Hands + your custom children</text>
+  <text x="47" y="549" class="small">Each child inherits all transforms above it.</text>
+  <text x="598" y="121" class="heading">Choose who controls what</text>
+  <text x="598" y="164" class="label">Mouse look</text>
+  <text x="598" y="187" class="small">input_enabled + current + capture + input lock</text>
+  <path d="M598 207h352" stroke="#354a65"/>
+  <text x="598" y="237" class="label">World positioning</text>
+  <text x="598" y="260" class="small">follow_parent = false preserves world pose</text>
+  <path d="M598 280h352" stroke="#354a65"/>
+  <text x="598" y="310" class="label">Body-to-rig feed</text>
+  <text x="598" y="333" class="small">camera_sync_motion on the character</text>
+  <path d="M598 353h352" stroke="#354a65"/>
+  <text x="598" y="383" class="label">FOV ownership</text>
+  <text x="598" y="406" class="small">movement_fov_enabled or set_target_fov()</text>
+  <path d="M598 426h352" stroke="#354a65"/>
+  <text x="598" y="456" class="label">Procedural offsets</text>
+  <text x="598" y="479" class="small">effects_enabled / reset_effects()</text>
+  <text x="598" y="530" class="small">The rig runs without a character.</text>
+  <text x="598" y="550" class="small">Translation is supplied by the host.</text>
+</svg>

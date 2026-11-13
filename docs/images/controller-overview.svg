@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460" role="img" aria-labelledby="title description">
+  <title id="title">FPSController: body, independent camera, and custom attachments</title>
+  <desc id="description">Three panels show a feet-origin capsule, a camera rig with a viewing cone, and a camera-relative custom attachment. Optional motion signals connect the body to the rig; Hands belongs to the rig.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#8eefda"/></marker>
+    <style>text{font-family:Arial,sans-serif;fill:#edf3ff}.heading{font-size:19px;font-weight:bold}.label{font-size:15px}.small{font-size:13px;fill:#b8c7dd}.outline{fill:#243553;stroke:#8da5f3;stroke-width:3}.link{fill:none;stroke:#8eefda;stroke-width:2;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1000" height="460" rx="18" fill="#111c2c"/>
+  <text x="30" y="37" class="heading">One package. Three focused responsibilities.</text>
+  <text x="30" y="62" class="small">Conceptual view - not an editor screenshot or a scale drawing</text>
+  <rect x="25" y="84" width="280" height="300" rx="12" fill="#1a2940"/>
+  <rect x="360" y="84" width="280" height="300" rx="12" fill="#1a2940"/>
+  <rect x="695" y="84" width="280" height="300" rx="12" fill="#1a2940"/>
+  <text x="45" y="116" class="heading">Physical character</text>
+  <text x="380" y="116" class="heading">Independent camera</text>
+  <text x="715" y="116" class="heading">Custom attachments</text>
+  <path d="M55 315H275" stroke="#60738f" stroke-width="2"/>
+  <rect x="127" y="143" width="76" height="172" rx="38" class="outline"/>
+  <circle cx="165" cy="315" r="5" fill="#8eefda"/>
+  <circle cx="165" cy="178" r="8" fill="#8eefda"/>
+  <path d="M177 178H245" class="link"/>
+  <text x="54" y="338" class="small">Root at feet; capsule collision</text>
+  <text x="54" y="359" class="small">Move / jump / stairs / gravity</text>
+  <path d="M432 182 577 145V282L432 245Z" fill="#8eefda" fill-opacity=".08" stroke="#8eefda" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M404 179h59l18 15v55h-77Z" class="outline"/>
+  <circle cx="439" cy="214" r="18" fill="none" stroke="#8eefda" stroke-width="3"/>
+  <path d="M433 214h12m-6-6v12" stroke="#8eefda" stroke-width="2"/>
+  <text x="385" y="338" class="small">Look / FOV / layered effects</text>
+  <text x="385" y="359" class="small">Can run without the character</text>
+  <path d="m735 245 68-40 113 40-68 42Z" fill="#243553" stroke="#8da5f3" stroke-width="2"/>
+  <path d="M735 245v30l113 43v-31m0 31 68-40v-33" fill="none" stroke="#8da5f3" stroke-width="2"/>
+  <circle cx="825" cy="173" r="18" fill="#243553" stroke="#8eefda" stroke-width="3"/>
+  <path d="M825 191v48" stroke="#8eefda" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="852" y="178" class="label">Hands</text>
+  <text x="718" y="338" class="small">Any Node3D-root subtree</text>
+  <text x="718" y="359" class="small">No item-specific base class</text>
+  <path d="M310 222h43" class="link"/>
+  <path d="M646 222h42" class="link"/>
+  <text x="333" y="261" class="small" text-anchor="middle">optional</text>
+  <text x="333" y="279" class="small" text-anchor="middle">motion</text>
+  <text x="667" y="261" class="small" text-anchor="middle">local</text>
+  <text x="667" y="279" class="small" text-anchor="middle">pose</text>
+  <rect x="25" y="402" width="950" height="36" rx="8" fill="#243553"/>
+  <text x="45" y="425" class="label">Host project supplies Input Map, world collision, UI, and gameplay rules.</text>
+</svg>

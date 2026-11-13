@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title description">
+  <title id="title">Hands: local poses and attachment lifetime</title>
+  <desc id="description">A conceptual camera view places a custom object right, down, and forward from the Hands origin, using local pose 0.25, negative 0.25, negative 0.5. A lifecycle panel shows attach, detach, reparent or free, and clear with queued deletion.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#8eefda"/></marker>
+    <style>text{font-family:Arial,sans-serif;fill:#edf3ff}.heading{font-size:19px;font-weight:bold}.label{font-size:14px}.small{font-size:12px;fill:#b8c7dd}.link{stroke:#8eefda;stroke-width:2;fill:none;marker-end:url(#arrow)}.box{fill:#243553;stroke:#8da5f3;stroke-width:1.5}</style>
+  </defs>
+  <rect width="1000" height="470" rx="18" fill="#111c2c"/>
+  <text x="28" y="36" class="heading">Hands is a camera-relative anchor, not an item system</text>
+  <text x="28" y="61" class="small">Original conceptual illustration / no weapon interface, inventory, or arms mesh is required</text>
+  <rect x="24" y="84" width="535" height="357" rx="12" fill="#1a2940"/>
+  <rect x="580" y="84" width="396" height="357" rx="12" fill="#1a2940"/>
+  <path d="M62 145h450v214H62Z" fill="#142137" stroke="#60738f" stroke-width="2"/>
+  <path d="M62 252h450m-225-107v214" stroke="#354a65" stroke-dasharray="5 5"/>
+  <circle cx="287" cy="252" r="7" fill="#8eefda"/>
+  <path d="M298 252h97m-108-11v-68m-8 71-71-52" class="link"/>
+  <text x="401" y="248" class="label">+X right</text>
+  <text x="295" y="180" class="label">+Y up</text>
+  <text x="105" y="183" class="label">-Z forward</text>
+  <path d="M295 263 381 311" stroke="#e0c989" stroke-width="2" stroke-dasharray="5 4"/>
+  <path d="m372 296 35-20 52 20-35 22Z" fill="#344c69" stroke="#8da5f3" stroke-width="2"/>
+  <path d="M372 296v31l52 21v-30m0 30 35-21v-31" fill="#243553" stroke="#8da5f3" stroke-width="2"/>
+  <text x="80" y="333" class="small">Hands origin</text>
+  <path d="M166 326 278 260" stroke="#60738f" stroke-width="1.5"/>
+  <text x="62" y="390" class="label">Example local position: (0.25, -0.25, -0.5)</text>
+  <text x="62" y="416" class="small">The supplied local pose replaces the old pose; not world-preserving.</text>
+  <text x="602" y="119" class="heading">You own attachment lifetime</text>
+  <rect x="602" y="141" width="350" height="37" rx="6" class="box"/>
+  <text x="617" y="165" class="label">attach_node() / instantiate_attachment()</text>
+  <path d="M778 180v22" class="link"/>
+  <rect x="650" y="207" width="254" height="37" rx="6" fill="#203d41" stroke="#8eefda" stroke-width="1.5"/>
+  <text x="665" y="231" class="label">Child of Hands; inherits view</text>
+  <path d="M778 246v22" class="link"/>
+  <rect x="650" y="273" width="254" height="37" rx="6" class="box"/>
+  <text x="665" y="297" class="label">detach_node() returns live node</text>
+  <path d="M778 312v22" class="link"/>
+  <text x="662" y="359" class="label">Reparent it, or free it yourself.</text>
+  <text x="602" y="407" class="small">clear_attachments(): detach + queue_free()</text>
+  <text x="602" y="426" class="small">Multiple custom Node3D children are supported.</text>
+</svg>

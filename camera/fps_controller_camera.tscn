@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b16xsdj61gw6d"]
+
+[ext_resource type="Script" uid="uid://bfgcy7jb8xc37" path="res://FPSController/camera/fps_controller_camera.gd" id="1_camera"]
+[ext_resource type="Script" uid="uid://b672bwisarhpm" path="res://FPSController/hands/fps_controller_hands.gd" id="2_hands"]
+
+[node name="FPSControllerCamera" type="Node3D" unique_id=458903960]
+script = ExtResource("1_camera")
+
+[node name="CameraRotationH" type="Node3D" parent="." unique_id=259138052]
+unique_name_in_owner = true
+
+[node name="CameraPivotStepping" type="Node3D" parent="CameraRotationH" unique_id=931068022]
+unique_name_in_owner = true
+
+[node name="CameraRotationV" type="Node3D" parent="CameraRotationH/CameraPivotStepping" unique_id=1992143925]
+unique_name_in_owner = true
+
+[node name="CameraPivotLanding" type="Node3D" parent="CameraRotationH/CameraPivotStepping/CameraRotationV" unique_id=338456131]
+unique_name_in_owner = true
+
+[node name="CameraPivotBobbing" type="Node3D" parent="CameraRotationH/CameraPivotStepping/CameraRotationV/CameraPivotLanding" unique_id=569104581]
+unique_name_in_owner = true
+
+[node name="CameraPivotShake" type="Node3D" parent="CameraRotationH/CameraPivotStepping/CameraRotationV/CameraPivotLanding/CameraPivotBobbing" unique_id=703967229]
+unique_name_in_owner = true
+
+[node name="Camera" type="Camera3D" parent="CameraRotationH/CameraPivotStepping/CameraRotationV/CameraPivotLanding/CameraPivotBobbing/CameraPivotShake" unique_id=867378552]
+unique_name_in_owner = true
+fov = 65.0
+
+[node name="Hands" type="Node3D" parent="CameraRotationH/CameraPivotStepping/CameraRotationV/CameraPivotLanding/CameraPivotBobbing/CameraPivotShake/Camera" unique_id=2132825130]
+unique_name_in_owner = true
+script = ExtResource("2_hands")

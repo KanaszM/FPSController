@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="490" viewBox="0 0 1000 490" role="img" aria-labelledby="title description">
+  <title id="title">Feet-origin capsule, stair checks, and landing measurement</title>
+  <desc id="description">Left: capsule height 1.95, radius 0.45, eye height 1.7 above a feet-origin root. Middle: upward, forward, then downward stair sweeps, with a walkable top probe. Right: fall distance is peak root height minus landing root height. All diagrams use world Y up.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#8eefda"/></marker>
+    <marker id="gold-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#e0c989"/></marker>
+    <style>text{font-family:Arial,sans-serif;fill:#edf3ff}.heading{font-size:18px;font-weight:bold}.label{font-size:14px}.small{font-size:12px;fill:#b8c7dd}.motion{fill:none;stroke:#8eefda;stroke-width:2;marker-end:url(#arrow)}.measure{stroke:#e0c989;stroke-width:2;fill:none}</style>
+  </defs>
+  <rect width="1000" height="490" rx="18" fill="#111c2c"/>
+  <text x="25" y="37" class="heading">Collision moves the body. Camera effects only change the view.</text>
+  <text x="25" y="61" class="small">World Y up / conceptual side views / dimensions in Godot units / not to scale</text>
+  <rect x="20" y="82" width="300" height="340" rx="12" fill="#1a2940"/>
+  <rect x="335" y="82" width="330" height="340" rx="12" fill="#1a2940"/>
+  <rect x="680" y="82" width="300" height="340" rx="12" fill="#1a2940"/>
+  <text x="40" y="113" class="heading">1. Feet-origin capsule</text>
+  <rect x="143" y="148" width="76" height="202" rx="38" fill="#243553" stroke="#8da5f3" stroke-width="3"/>
+  <path d="M45 350h250" stroke="#60738f" stroke-width="2"/>
+  <circle cx="181" cy="350" r="5" fill="#8eefda"/>
+  <circle cx="181" cy="175" r="7" fill="#8eefda"/>
+  <path d="M85 148v202m-5-202h10m-10 202h10" class="measure"/>
+  <text x="47" y="245" class="label">1.95</text>
+  <path d="M257 175v175m-5-175h10m-10 175h10" class="measure"/>
+  <text x="264" y="264" class="label">1.7</text>
+  <path d="M181 250h38" class="measure"/>
+  <text x="166" y="239" class="small">r = 0.45</text>
+  <text x="40" y="380" class="label">O = body root at feet</text>
+  <text x="40" y="401" class="small">Eye height is separate from height.</text>
+  <text x="355" y="113" class="heading">2. Clear the stair</text>
+  <path d="M352 350H510V310H645" fill="none" stroke="#8da5f3" stroke-width="3"/>
+  <path d="M510 310h135v40H510Z" fill="#243553"/>
+  <rect x="403" y="245" width="40" height="105" rx="20" fill="#243553" stroke="#8da5f3" stroke-width="2"/>
+  <path d="M424 236v-65h120v85" class="motion"/>
+  <path d="M582 240v62" class="measure" marker-end="url(#gold-arrow)"/>
+  <circle cx="582" cy="310" r="5" fill="#e0c989"/>
+  <text x="355" y="196" class="label">up</text>
+  <text x="461" y="159" class="label">forward</text>
+  <text x="549" y="221" class="label">down</text>
+  <text x="595" y="270" class="small">top</text>
+  <text x="595" y="287" class="small">probe</text>
+  <text x="355" y="380" class="label">Max rise: 0.3 by default</text>
+  <text x="355" y="401" class="small">Need clearance and walkable static top.</text>
+  <text x="700" y="113" class="heading">3. Measure a landing</text>
+  <path d="M700 350h260" stroke="#60738f" stroke-width="2"/>
+  <circle cx="762" cy="172" r="6" fill="#8eefda"/>
+  <path d="M762 188v145" class="motion"/>
+  <circle cx="762" cy="350" r="6" fill="#8eefda"/>
+  <path d="M820 172v178m-5-178h10m-10 178h10" class="measure"/>
+  <text x="837" y="250" class="label">fall</text>
+  <text x="837" y="270" class="label">distance</text>
+  <text x="700" y="150" class="small">Highest airborne root Y</text>
+  <text x="700" y="380" class="label">Threshold: 0.3 by default</text>
+  <text x="700" y="401" class="small">Signal + optional dip; no fall damage.</text>
+  <text x="28" y="455" class="label">Mint: motion / origin     Gold: measurement or surface probe     Blue: collision geometry</text>
+</svg>
