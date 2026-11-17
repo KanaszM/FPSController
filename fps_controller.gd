@@ -226,14 +226,12 @@ func shake_camera(strength: float, duration: float = 0.25) -> void:
 #endregion
 
 #region Private Methods
-func _enter_tree() -> void:
+func _ready() -> void:
 	camera_rig.set_input_blocked(
 		(_is_disabled if _is_initialized else data != null and data.general_start_disabled)
 		and not camera_independent_input
 		)
-
-
-func _ready() -> void:
+	
 	update()
 
 
