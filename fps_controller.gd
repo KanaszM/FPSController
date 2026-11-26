@@ -20,6 +20,7 @@ signal move_type_changed(move_type: FPSControllerData.MoveType)
 
 #region Exports
 @export var data: FPSControllerData
+@export var camera_data: FPSControllerCameraData
 
 @export_group("Camera", "camera_")
 @export var camera_independent_input: bool: set = _set_camera_independent_input
@@ -58,44 +59,58 @@ var _jump_cooldown_remaining: float
 
 var _fall_tracking: bool
 var _fall_peak: float
+
+var _light_omni: OmniLight3D
+var _light_spot: SpotLight3D
 #endregion
 
 #region Public Methods
 static func instantiate(
-	controller_data: FPSControllerData = null,
-	camera_data: FPSControllerCameraData = null,
+	data_reference: FPSControllerData = null,
+	camera_data_reference: FPSControllerCameraData = null,
 	) -> FPSController:
-	var pack: PackedScene = load(PACK_UID) as PackedScene
-	
-	if pack == null or not pack.can_instantiate():
-		push_error(
-			"FPSController scene could not be loaded: %s!"
-			% ResourceUID.get_id_path(ResourceUID.text_to_id((PACK_UID)))
-			)
-		return null
-	
-	var instance: FPSController = pack.instantiate() as FPSController
-	
-	if instance == null:
-		push_error("FPSController scene must have an FPSController root!")
-		instance.free()
-		return null
-	
-	instance.data = controller_data
-	
-	if camera_data != null:
-		instance.get_camera_rig().data = camera_data
-	
-	return instance
+		var pack: PackedScene = load(PACK_UID) as PackedScene
+		
+		if pack == null or not pack.can_instantiate():
+			push_error(
+				"FPSController scene could not be loaded: %s!"
+				% ResourceUID.get_id_path(ResourceUID.text_to_id((PACK_UID)))
+				)
+			return null
+		
+		var instance := pack.instantiate() as FPSController
+		
+		if instance == null:
+			push_error("FPSController scene must have an FPSController root!")
+			return null
+		
+		instance.data = data_reference
+		instance.camera_data = camera_data_reference
+		
+		return instance
 
 
 func update() -> void:
 	if not is_node_ready():
 		return
 	
+	#region Data Check
 	if data == null:
 		data = FPSControllerData.new()
 	
+	if camera_data == null:
+		camera_data = FPSControllerCameraData.new()
+	
+	camera_rig.data = camera_data
+	#endregion
+	
+	#region Initialization
+	if not _is_initialized:
+		_is_disabled = data.general_start_disabled
+		_is_initialized = true
+	#endregion
+	
+	#region Collision Update
 	if (
 		data.collision_radius <= 0.0
 		or data.collision_height < data.collision_radius * 2.0
@@ -123,10 +138,53 @@ func update() -> void:
 	collision.position = Vector3(0.0, data.collision_height / 2.0, 0.0)
 	collision_layer = data.collision_layer
 	collision_mask = data.collision_mask
+	#endregion
 	
-	if camera_rig.follow_parent:
-		camera_rig.position.y = data.camera_eye_height
+	#region Light Update
+	var remove_omni_light: bool = (
+		data.light_mode == FPSControllerData.LightMode.DISABLED
+		or data.light_mode == FPSControllerData.LightMode.SPOT
+		)
+	var remove_spot_light: bool = (
+		data.light_mode == FPSControllerData.LightMode.DISABLED
+		or data.light_mode == FPSControllerData.LightMode.OMNI
+		)
+	var add_omni_light: bool = data.light_mode == FPSControllerData.LightMode.OMNI
+	var add_spot_light: bool = data.light_mode == FPSControllerData.LightMode.SPOT
 	
+	for child: Node in get_children():
+		if child is OmniLight3D:
+			_light_omni = child as OmniLight3D
+		
+		elif child is SpotLight3D:
+			_light_spot = child as SpotLight3D
+	
+	if remove_omni_light and _light_omni != null:
+		_light_omni.queue_free()
+	
+	if remove_spot_light and _light_spot != null:
+		_light_spot.queue_free()
+	
+	if add_omni_light:
+		if _light_omni == null:
+			_light_omni = OmniLight3D.new()
+			add_child(_light_omni)
+		
+		_light_omni.light_color = data.light_color
+		_light_omni.light_energy = data.light_size
+		_light_omni.position.y = data.light_height
+	
+	if add_spot_light:
+		if _light_spot == null:
+			_light_spot = SpotLight3D.new()
+			add_child(_light_spot)
+		
+		_light_spot.light_color = data.light_color
+		_light_spot.light_energy = data.light_size
+		_light_spot.position.y = data.light_height
+	#endregion
+	
+	#region Ray and Snapping Update
 	ray_ceiling_above.position.y = data.collision_height
 	ray_ceiling_above.target_position = (
 		Vector3.UP * maxf(MIN_JUMP_CEILING_CLEARANCE, data.jump_ceiling_clearance)
@@ -134,21 +192,27 @@ func update() -> void:
 	ray_ceiling_above.collision_mask = collision_mask
 	ray_ceiling_above.add_exception(self)
 	floor_snap_length = maxf(0.0, data.step_max_height) if data.step_enabled else 0.1
+	#endregion
 	
+	#region Resets
 	_toggled_walk = false
 	_toggled_run = false
-	_jump_cooldown_remaining = 0.0
 	_step_snapped = false
 	_fall_tracking = false
+	
+	_jump_cooldown_remaining = 0.0
 	_current_speed = maxf(0.0, data.move_speed_normal)
 	_set_movement_state(false, FPSControllerData.MoveType.NORMAL)
+	#endregion
+	
+	#region Camera Update
+	if camera_rig.follow_parent:
+		camera_rig.position.y = data.camera_eye_height
+	
 	camera_rig.update()
-	
-	if not _is_initialized:
-		_is_disabled = data.general_start_disabled
-		_is_initialized = true
-	
 	camera_rig.set_input_blocked(_is_disabled and not camera_independent_input)
+	#endregion
+	
 	set_physics_process(true)
 	set_process_unhandled_input(true)
 	updated.emit(true)

@@ -3,6 +3,7 @@ class_name FPSControllerData extends Resource
 
 #region Enums
 enum MoveType {NORMAL, WALK, RUN}
+enum LightMode {DISABLED, OMNI, SPOT}
 #endregion
 
 #region Exports
@@ -66,4 +67,10 @@ enum MoveType {NORMAL, WALK, RUN}
 @export var input_walk: StringName = &"fps_walk"
 @export var input_run: StringName = &"fps_run"
 @export var input_jump: StringName = &"fps_jump"
+
+@export_group("Light", "light_")
+@export var light_mode: LightMode
+@export_color_no_alpha var light_color: Color = Color.LIGHT_YELLOW
+@export_range(0.01, 4.0, 0.01, "or_greater") var light_height: float = 1.5
+@export_range(0.01, 10.0, 0.01, "or_greater") var light_size: float = 1.0
 #endregion

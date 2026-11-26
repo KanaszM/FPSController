@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlsx5ttt5rpdj"]
 
-[ext_resource type="Script" uid="uid://bxrc3pphum0eh" path="res://FPSController/fps_controller.gd" id="1_controller"]
-[ext_resource type="PackedScene" uid="uid://b16xsdj61gw6d" path="res://FPSController/camera/fps_controller_camera.tscn" id="2_camera"]
+[ext_resource type="Script" uid="uid://bxrc3pphum0eh" path="res://modules/FPSController/fps_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" uid="uid://b16xsdj61gw6d" path="res://modules/FPSController/camera/fps_controller_camera.tscn" id="2_camera"]
 
 [sub_resource type="CapsuleShape3D" id="Capsule_body"]
 radius = 0.45
